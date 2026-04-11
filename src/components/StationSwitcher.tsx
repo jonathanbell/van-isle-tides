@@ -15,8 +15,8 @@ export function StationSwitcher({ stations, activeId, onSelect }: Props) {
             <button
               type="button"
               className={
-                'station-switcher__chip' +
-                (s.id === activeId ? ' station-switcher__chip--active' : '')
+                'station-switcher__row' +
+                (s.id === activeId ? ' station-switcher__row--active' : '')
               }
               aria-pressed={s.id === activeId}
               onClick={() => onSelect(s.id)}

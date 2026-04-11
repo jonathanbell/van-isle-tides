@@ -137,14 +137,14 @@ export default function App() {
         </>
       )}
 
-      <StationSwitcher stations={pinned} activeId={activeId} onSelect={handleSelect} />
-
-      <div className="app__footer">
+      <div className="app__near-me">
         <NearMeButton
           stations={stations}
           onPick={handleSelect}
         />
       </div>
+
+      <StationSwitcher stations={pinned} activeId={activeId} onSelect={handleSelect} />
     </div>
   );
 }

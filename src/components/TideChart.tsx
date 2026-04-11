@@ -14,8 +14,20 @@ export interface TideChartProps {
   toMs: number;
 }
 
-function readThemeTokens(): { line: string; grid: string; now: string; band: string; fg: string; stroke: number } {
+interface ThemeTokens {
+  line: string;
+  grid: string;
+  now: string;
+  band: string;
+  fg: string;
+  stroke: number;
+  labelFontPx: number;
+  axisFontPx: number;
+}
+
+function readThemeTokens(): ThemeTokens {
   const s = getComputedStyle(document.documentElement);
+  const sm = parseFloat(s.getPropertyValue('--font-size-sm')) || 14;
   return {
     line: s.getPropertyValue('--chart-line').trim() || '#0a66c2',
     grid: s.getPropertyValue('--chart-grid').trim() || '#e3e6ea',
@@ -23,6 +35,10 @@ function readThemeTokens(): { line: string; grid: string; now: string; band: str
     band: s.getPropertyValue('--chart-band').trim() || 'rgba(0,0,0,0.06)',
     fg: s.getPropertyValue('--fg').trim() || '#111418',
     stroke: parseFloat(s.getPropertyValue('--chart-stroke')) || 2,
+    // Hi/lo markers need to be legible from arm's length, so they get a
+    // bump over the axis ticks. Axis stays tied to --font-size-sm.
+    labelFontPx: sm + 2,
+    axisFontPx: sm,
   };
 }
 
@@ -44,7 +60,9 @@ export function TideChart(props: TideChartProps) {
       if (!host.isConnected) return;
       const { width } = host.getBoundingClientRect();
       if (width === 0) return;
-      const height = Math.min(360, Math.round(width * 0.55));
+      // On narrow viewports (mobile) we want a taller chart since it's the
+      // primary content. Clamp to [320, 480] and bias toward taller.
+      const height = Math.max(320, Math.min(480, Math.round(width * 0.7)));
       const tokens = readThemeTokens();
 
       const xs = props.points.map((p) => p.t / 1000);
@@ -74,16 +92,21 @@ export function TideChart(props: TideChartProps) {
             stroke: tokens.fg,
             grid: { stroke: tokens.grid, width: 1 },
             ticks: { stroke: tokens.grid, width: 1 },
-            font: '500 13px -apple-system, system-ui, sans-serif',
+            font: `500 ${tokens.axisFontPx}px -apple-system, system-ui, sans-serif`,
           },
           {
             stroke: tokens.fg,
             grid: { stroke: tokens.grid, width: 1 },
             ticks: { stroke: tokens.grid, width: 1 },
-            font: '500 13px -apple-system, system-ui, sans-serif',
-            size: 46,
+            font: `500 ${tokens.axisFontPx}px -apple-system, system-ui, sans-serif`,
+            // Keep the left axis region tight: rotated "Height (m)" label
+            // hugs the tick values, which hugs the plot area.
+            size: 38,
+            gap: 2,
             label: 'Height (m)',
-            labelFont: '600 13px -apple-system, system-ui, sans-serif',
+            labelSize: 14,
+            labelGap: 0,
+            labelFont: `600 ${tokens.axisFontPx}px -apple-system, system-ui, sans-serif`,
           },
         ],
         series: [
@@ -138,18 +161,20 @@ export function TideChart(props: TideChartProps) {
 
               // Hi/lo markers
               ctx.fillStyle = tokens.fg;
-              ctx.font = '600 13px -apple-system, system-ui, sans-serif';
+              ctx.font = `700 ${tokens.labelFontPx}px -apple-system, system-ui, sans-serif`;
               ctx.textAlign = 'center';
+              const dotR = Math.max(4, tokens.stroke + 2);
+              const labelGap = Math.round(tokens.labelFontPx * 0.5);
               for (const e of props.hiLo) {
                 if (e.t < props.fromMs || e.t > props.toMs) continue;
                 const x = u.valToPos(e.t / 1000, 'x', true);
                 const y = u.valToPos(e.v, 'y', true);
                 ctx.beginPath();
-                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.arc(x, y, dotR, 0, Math.PI * 2);
                 ctx.fill();
                 const label = `${formatLocalTime(e.t)} ${e.v.toFixed(1)}m`;
                 ctx.textBaseline = e.type === 'HIGH' ? 'bottom' : 'top';
-                ctx.fillText(label, x, e.type === 'HIGH' ? y - 6 : y + 6);
+                ctx.fillText(label, x, e.type === 'HIGH' ? y - labelGap : y + labelGap);
               }
               ctx.restore();
             },

@@ -200,40 +200,40 @@ button:active {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.station-switcher__list::-webkit-scrollbar {
-  display: none;
-}
-
-.station-switcher__chip {
-  white-space: nowrap;
+.station-switcher__row {
+  display: flex;
+  align-items: center;
+  width: 100%;
   min-height: var(--hit);
   padding: 0 16px;
-  border-radius: 999px;
+  border: 1px solid var(--chart-grid);
+  border-radius: var(--radius);
+  background: var(--bg);
   font-size: var(--font-size-base);
+  font-weight: 600;
+  text-align: left;
 }
 
-.station-switcher__chip--active {
+.station-switcher__row--active {
   background: var(--fg);
   color: var(--bg);
   border-color: var(--fg);
   font-weight: 700;
 }
 
-.app__footer {
+.app__near-me {
   display: flex;
   justify-content: center;
-  padding-top: 8px;
 }
 
 .near-me {
+  width: 100%;
   min-height: var(--hit);
   padding: 0 20px;
   border-radius: var(--radius);
-  font-weight: 600;
+  font-weight: 700;
 }
