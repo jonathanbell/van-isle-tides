@@ -14,28 +14,79 @@ import { fileURLToPath } from 'node:url';
 
 const IWLS_BASE = 'https://api-iwls.dfo-mpo.gc.ca/api/v1';
 
-// Order matters: the first six become the default pinned set.
-const CURATED_CODES: string[] = [
-  // Pinned (user-chosen)
-  '07120', // Victoria Harbour
-  '07109', // Esquimalt Harbour
-  '08545', // Bamfield
-  '08615', // Tofino
-  '08408', // Port Hardy
+// Pinned-by-default set (display order). These appear in the switcher on
+// first launch; users can unpin any of them via the edit UI.
+const PINNED_CODES: string[] = [
+  '07130', // Oak Bay
+  '07913', // Harmac
+  '08105', // Seymour Narrows
+  '08290', // Port McNeill
   '08790', // Cape Scott
-  // Curated extras around Vancouver Island
-  '07277', // Patricia Bay
-  '07330', // Fulford Harbour
-  '07460', // Point Atkinson (mainland, reference)
-  '07535', // Nanaimo
-  '07917', // Campbell River
-  '08074', // Alert Bay
-  '08525', // Ucluelet
-  '08735', // Winter Harbour
-  '08976', // Kyuquot
+  '08720', // Bunsby Islands
+  '08665', // Esperanza
+  '08615', // Tofino
 ];
 
-const PINNED_COUNT = 6;
+// Catalog set — seeded but not pinned. Shown in the "+ Add station" sheet
+// and available as Near Me candidates. Picked for broad Van-Isle coverage
+// so that Near Me on a boat almost anywhere around the island finds a
+// station within ~15–25 km.
+const UNPINNED_CODES: string[] = [
+  // Greater Victoria / south coast
+  '07010', // Point No Point
+  '07020', // Sooke
+  '07080', // Pedder Bay
+  '07109', // Esquimalt Harbour
+  '07120', // Victoria Harbour
+  '07260', // Sidney
+  '07277', // Patricia Bay
+  '07280', // Brentwood Bay
+  // Gulf Islands / Cowichan
+  '07310', // Cowichan Bay
+  '07330', // Fulford Harbour
+  '07350', // Bedwell Harbour
+  '07407', // Ganges
+  '07420', // Montague Harbour
+  '07455', // Chemainus
+  '07460', // Ladysmith
+  '07471', // Preedy Harbour
+  '07535', // Dionisio Point
+  // East-central Van Isle
+  '07917', // Nanaimo Harbour
+  '07930', // Nanoose Bay
+  '07940', // French Creek
+  '07953', // Hornby Island
+  '07955', // Denman Island
+  '07965', // Comox
+  // Campbell River / Quadra / Discovery Islands
+  '08035', // Heriot Bay
+  '08074', // Campbell River
+  '08079', // Quathiaski Cove
+  // North-east Van Isle
+  '08215', // Kelsey Bay
+  '08258', // Lagoon Cove
+  '08280', // Alert Bay
+  '08364', // Sullivan Bay
+  '08408', // Port Hardy
+  // West coast
+  '08525', // Port Renfrew
+  '08545', // Bamfield
+  '08575', // Port Alberni
+  '08595', // Ucluelet
+  // North-west inlets / Nootka / Kyuquot
+  '08650', // Gold River
+  '08664', // Ceepeecee
+  '08670', // Zeballos
+  '08710', // Kyuquot
+  '08715', // Fair Harbour
+  // North island / Quatsino Sound
+  '08735', // Winter Harbour
+  '08750', // Port Alice
+  '08765', // Coal Harbour
+];
+
+const CURATED_CODES: string[] = [...PINNED_CODES, ...UNPINNED_CODES];
+const PINNED_COUNT = PINNED_CODES.length;
 
 interface IwlsStationRaw {
   id: string;

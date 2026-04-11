@@ -17,10 +17,25 @@ function toRad(deg: number): number {
   return (deg * Math.PI) / 180;
 }
 
+/**
+ * Human-friendly km formatter. Sub-km → metres, 1–10 km → 1 decimal,
+ * ≥10 km → whole km. Used anywhere the UI shows distance from the user.
+ */
+export function formatKm(km: number): string {
+  if (km < 1) return `${Math.round(km * 1000)} m`;
+  if (km < 10) return `${km.toFixed(1)} km`;
+  return `${Math.round(km)} km`;
+}
+
+export interface NearestStationResult<T> {
+  station: T;
+  distanceKm: number;
+}
+
 export function nearestStation<T extends { lat: number; lon: number }>(
   point: { lat: number; lon: number },
   stations: T[],
-): T | null {
+): NearestStationResult<T> | null {
   if (!stations.length) return null;
   let best = stations[0];
   let bestD = haversineKm(point, best);
@@ -31,5 +46,5 @@ export function nearestStation<T extends { lat: number; lon: number }>(
       bestD = d;
     }
   }
-  return best;
+  return { station: best, distanceKm: bestD };
 }

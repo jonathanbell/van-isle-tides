@@ -79,7 +79,10 @@ Three invariants to preserve:
    amber banner but the chart still renders from cache.
 
 Hi/lo events are held in an in-memory `Map` (`hiLoCache`) rather than IDB — they're
-cheap to re-derive on next sync and only the 48 h live view needs them.
+cheap to re-derive on next sync and only the 48 h live view needs them. On cold
+reload the cache is empty, so `useTideData` falls back to `deriveHiLo(points)`
+(`src/lib/hilo.ts`) — local peak detection over the 15-min points. The in-memory
+`wlp-hilo` values (minute-precise) still win whenever they exist.
 
 ### Render window
 
@@ -127,10 +130,29 @@ PWA manifest's `start_url`/`scope` also hang off this base — keep them in sync
 app layer owns IWLS caching through IDB and needs TTL control the SW can't give it.
 Don't add IWLS URLs to Workbox runtime caching.
 
-### Station seed
+### Station seed and runtime pin/unpin
 
 `scripts/fetch-stations.ts` refreshes `src/data/stations.seed.json` by hitting IWLS
-directly (manual; not run in CI). The first 6 entries are the pinned set
-(Victoria/Esquimalt/Bamfield/Tofino/Port Hardy/Cape Scott) in display order.
+directly (manual; not run in CI). The script has two arrays — `PINNED_CODES`
+(shown in the switcher on first launch, in display order) and `UNPINNED_CODES`
+(seeded but not pinned; shown in the "+ Add station" sheet and used as Near Me
+candidates). The current defaults are 8 pinned (Oak Bay, Harmac, Seymour Narrows,
+Port McNeill, Cape Scott, Bunsby Islands, Esperanza, Tofino) plus ~43 unpinned for
+a broad Van-Isle spread.
+
 `bootstrapStationsIfEmpty()` bulk-inserts the seed on first launch only — it's
-idempotent and skips if the `stations` store already has rows.
+idempotent and skips if the `stations` store already has rows. **This means
+existing installs won't pick up seed changes automatically** — bump by clearing
+the `vit` IndexedDB or adding a migration that bumps a `seedVersion` setting.
+
+Runtime pin/unpin is in `src/db/tides.ts`:
+- `pinStation(id)` / `unpinStation(id)` — one-transaction idempotent toggles.
+  Unpinning leaves the row + cached predictions in IDB so re-pinning is free.
+- `StationPickerSheet.tsx` is the "+ Add station" modal (unpinned catalog,
+  alphabetised).
+- Near Me picks from all stations (pinned + unpinned) via `nearestStation()`,
+  which now returns `{station, distanceKm}`. If the pick isn't already pinned,
+  `App.tsx:pinSyncAndActivate` pins it, fires a one-station sync, and activates.
+  A failed sync leaves the pin in place so it'll re-sync next time online.
+- Never allow unpinning the last remaining pinned station — the switcher
+  disables the × button when `pinned.length <= 1`.

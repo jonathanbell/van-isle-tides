@@ -1,9 +1,17 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { bootstrapStationsIfEmpty } from './db/bootstrap';
-import { getSetting, listAllStations, listPinnedStations, setSetting } from './db/tides';
+import {
+  getSetting,
+  listAllStations,
+  listPinnedStations,
+  pinStation,
+  setSetting,
+  unpinStation,
+} from './db/tides';
 import type { StationRecord } from './db/schema';
 import { StationHeader } from './components/StationHeader';
 import { StationSwitcher } from './components/StationSwitcher';
+import { StationPickerSheet } from './components/StationPickerSheet';
 import { TideChart } from './components/TideChart';
 import { HiLoStrip } from './components/HiLoStrip';
 import { NearMeButton } from './components/NearMeButton';
@@ -11,8 +19,10 @@ import { useTheme } from './hooks/useTheme';
 import { useTideData } from './hooks/useTideData';
 import { syncAllPinned, syncStation, type SyncProgress } from './sync/sync';
 import { nightBands } from './lib/sun';
+import type { GeoPoint } from './hooks/useGeolocation';
 
 const ACTIVE_STATION_KEY = 'activeStationId';
+const LAST_GEO_POINT_KEY = 'lastGeoPoint';
 
 export default function App() {
   const { mode, toggleSun } = useTheme();
@@ -24,19 +34,23 @@ export default function App() {
   const [syncing, setSyncing] = useState(false);
   const [syncProgress, setSyncProgress] = useState<SyncProgress | undefined>(undefined);
   const [now, setNow] = useState(() => Date.now());
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [userPoint, setUserPoint] = useState<GeoPoint | undefined>(undefined);
 
-  // Boot: seed IDB, load stations, pick initial active.
+  // Boot: seed IDB, load stations, pick initial active, restore last GPS.
   useEffect(() => {
     void (async () => {
       await bootstrapStationsIfEmpty();
-      const [all, pinnedList, savedActive] = await Promise.all([
+      const [all, pinnedList, savedActive, savedGeo] = await Promise.all([
         listAllStations(),
         listPinnedStations(),
         getSetting<string>(ACTIVE_STATION_KEY),
+        getSetting<GeoPoint>(LAST_GEO_POINT_KEY),
       ]);
       setStations(all);
       setPinned(pinnedList);
       setActiveId(savedActive ?? pinnedList[0]?.id);
+      if (savedGeo) setUserPoint(savedGeo);
       setBooted(true);
     })();
   }, []);
@@ -92,6 +106,84 @@ export default function App() {
     setSyncing(false);
   }, [activeId]);
 
+  // Shared "pin + sync + activate" flow. Used by Near Me (auto-pin the
+  // nearest station if it isn't already) and the Add Station sheet (user
+  // explicitly picks one). A failed sync leaves the pin in place so the
+  // station will resync next time the app is online.
+  const pinSyncAndActivate = useCallback(
+    async (stationId: string) => {
+      const target = stations.find((s) => s.id === stationId);
+      if (!target) return;
+      if (!target.pinned) {
+        await pinStation(stationId);
+        const [all, pinnedList] = await Promise.all([
+          listAllStations(),
+          listPinnedStations(),
+        ]);
+        setStations(all);
+        setPinned(pinnedList);
+        setSyncing(true);
+        setSyncProgress({
+          done: 0,
+          total: 1,
+          currentId: stationId,
+          currentName: target.name,
+        });
+        await syncStation(stationId, Date.now());
+        setSyncProgress(undefined);
+        setSyncing(false);
+      }
+      setActiveId(stationId);
+      void setSetting(ACTIVE_STATION_KEY, stationId);
+      setRefreshToken((t) => t + 1);
+    },
+    [stations],
+  );
+
+  const handleNearMePick = useCallback(
+    (id: string, point: GeoPoint) => {
+      // Persist the GPS fix so distance labels survive page reloads and
+      // show even before the user taps Near Me in a future session.
+      setUserPoint(point);
+      void setSetting(LAST_GEO_POINT_KEY, point);
+      void pinSyncAndActivate(id);
+    },
+    [pinSyncAndActivate],
+  );
+
+  const handlePinFromSheet = useCallback(
+    (id: string) => {
+      setPickerOpen(false);
+      void pinSyncAndActivate(id);
+    },
+    [pinSyncAndActivate],
+  );
+
+  const handleUnpin = useCallback(
+    async (id: string) => {
+      if (pinned.length <= 1) return;
+      await unpinStation(id);
+      const [all, pinnedList] = await Promise.all([
+        listAllStations(),
+        listPinnedStations(),
+      ]);
+      setStations(all);
+      setPinned(pinnedList);
+      // If the user just unpinned the station they were looking at,
+      // re-home to the first remaining pinned station rather than
+      // dumping them onto the empty state.
+      if (id === activeId) {
+        const next = pinnedList[0]?.id;
+        if (next) {
+          setActiveId(next);
+          void setSetting(ACTIVE_STATION_KEY, next);
+          setRefreshToken((t) => t + 1);
+        }
+      }
+    },
+    [pinned, activeId],
+  );
+
   const bands = useMemo(() => {
     if (tide.state !== 'ready' || !activeStation) return [];
     return nightBands(tide.data.fromMs, tide.data.toMs, activeStation.lat, activeStation.lon);
@@ -112,6 +204,7 @@ export default function App() {
         onToggleSun={toggleSun}
         onRefresh={handleRefresh}
         syncing={syncing}
+        userPoint={userPoint}
       />
 
       {tide.state === 'loading' && <p className="placeholder">Loading tide data…</p>}
@@ -140,11 +233,27 @@ export default function App() {
       <div className="app__near-me">
         <NearMeButton
           stations={stations}
-          onPick={handleSelect}
+          onPick={handleNearMePick}
         />
       </div>
 
-      <StationSwitcher stations={pinned} activeId={activeId} onSelect={handleSelect} />
+      <StationSwitcher
+        stations={pinned}
+        activeId={activeId}
+        onSelect={handleSelect}
+        onUnpin={handleUnpin}
+        onAdd={() => setPickerOpen(true)}
+        userPoint={userPoint}
+      />
+
+      {pickerOpen && (
+        <StationPickerSheet
+          candidates={stations.filter((s) => !s.pinned)}
+          onPin={handlePinFromSheet}
+          onClose={() => setPickerOpen(false)}
+          userPoint={userPoint}
+        />
+      )}
     </div>
   );
 }

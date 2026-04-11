@@ -7,6 +7,7 @@ import {
   type StationCacheStats,
 } from '../db/tides';
 import { getCachedHiLo } from '../sync/sync';
+import { deriveHiLo } from '../lib/hilo';
 
 export interface TideWindow {
   points: TidePoint[];
@@ -51,13 +52,17 @@ export function useTideData({ stationId, refreshToken, now }: UseTideDataArgs):
         getCacheStats(stationId),
       ]);
       if (cancelled) return;
-      const hiLo = (getCachedHiLo(stationId) ?? []).filter(
-        (e) => e.t >= fromMs && e.t <= toMs,
-      );
       if (!points.length) {
         setResult({ state: 'empty' });
         return;
       }
+      // Prefer IWLS minute-precise hi/lo from the in-memory cache. On
+      // cold reload that cache is empty (it's not persisted to IDB), so
+      // fall back to local peak detection over the 15-min points — the
+      // strip/markers render immediately instead of waiting for Refresh.
+      const cached = getCachedHiLo(stationId);
+      const source = cached && cached.length ? cached : deriveHiLo(points);
+      const hiLo = source.filter((e) => e.t >= fromMs && e.t <= toMs);
       setResult({
         state: 'ready',
         data: {

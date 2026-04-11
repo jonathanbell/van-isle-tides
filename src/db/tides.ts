@@ -48,6 +48,47 @@ export async function updateStationPinning(
   await tx.done;
 }
 
+const UNPINNED_ORDER = Number.MAX_SAFE_INTEGER;
+
+/**
+ * Pin a station and append it to the end of the pinned list. Idempotent —
+ * no-op if the station is already pinned or doesn't exist.
+ */
+export async function pinStation(stationId: string): Promise<void> {
+  const db = await getDB();
+  const tx = db.transaction('stations', 'readwrite');
+  const store = tx.store;
+  const existing = await store.get(stationId);
+  if (!existing || existing.pinned) {
+    await tx.done;
+    return;
+  }
+  const all = await store.getAll();
+  const maxOrder = all
+    .filter((s) => s.pinned)
+    .reduce((m, s) => Math.max(m, s.pinOrder), -1);
+  await store.put({ ...existing, pinned: true, pinOrder: maxOrder + 1 });
+  await tx.done;
+}
+
+/**
+ * Unpin a station. Idempotent — no-op if already unpinned or missing.
+ * The station row stays in IDB (along with its cached predictions) so
+ * re-pinning is cheap and predictions don't need to be re-fetched.
+ */
+export async function unpinStation(stationId: string): Promise<void> {
+  const db = await getDB();
+  const tx = db.transaction('stations', 'readwrite');
+  const store = tx.store;
+  const existing = await store.get(stationId);
+  if (!existing || !existing.pinned) {
+    await tx.done;
+    return;
+  }
+  await store.put({ ...existing, pinned: false, pinOrder: UNPINNED_ORDER });
+  await tx.done;
+}
+
 /* -------------------------------------------------------------------------- */
 /* Predictions                                                                */
 /* -------------------------------------------------------------------------- */

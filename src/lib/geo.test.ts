@@ -23,14 +23,23 @@ describe('nearestStation', () => {
   ];
 
   it('picks Victoria when near downtown Victoria', () => {
-    expect(nearestStation({ lat: 48.43, lon: -123.37 }, stations)?.id).toBe('vic');
+    const r = nearestStation({ lat: 48.43, lon: -123.37 }, stations);
+    expect(r?.station.id).toBe('vic');
+    expect(r?.distanceKm).toBeLessThan(5);
   });
 
   it('picks Port Hardy when near the north tip', () => {
-    expect(nearestStation({ lat: 50.72, lon: -127.5 }, stations)?.id).toBe('phy');
+    const r = nearestStation({ lat: 50.72, lon: -127.5 }, stations);
+    expect(r?.station.id).toBe('phy');
   });
 
   it('returns null for an empty list', () => {
     expect(nearestStation({ lat: 0, lon: 0 }, [])).toBeNull();
+  });
+
+  it('returns the haversine distance to the chosen station', () => {
+    const r = nearestStation({ lat: 49.154, lon: -125.913 }, stations);
+    expect(r?.station.id).toBe('tof');
+    expect(r?.distanceKm).toBeLessThan(0.1);
   });
 });

@@ -204,10 +204,18 @@ button:active {
   gap: 6px;
 }
 
+.station-switcher__item {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+}
+
 .station-switcher__row {
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
+  gap: 12px;
   min-height: var(--hit);
   padding: 0 16px;
   border: 1px solid var(--chart-grid);
@@ -218,11 +226,162 @@ button:active {
   text-align: left;
 }
 
+.station-switcher__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.station-switcher__distance {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 .station-switcher__row--active {
   background: var(--fg);
   color: var(--bg);
   border-color: var(--fg);
   font-weight: 700;
+}
+
+.station-switcher__row--active .station-switcher__distance {
+  color: var(--bg);
+  opacity: 0.8;
+}
+
+.station-switcher__unpin {
+  flex: 0 0 auto;
+  width: var(--hit);
+  min-height: var(--hit);
+  padding: 0;
+  border: 1px solid var(--chart-grid);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--muted);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.station-switcher__add {
+  width: 100%;
+  min-height: var(--hit);
+  margin-top: 8px;
+  padding: 0 16px;
+  border: 1px dashed var(--muted);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Modal overlay for the Add Station sheet. Slides up from the bottom
+   on mobile and centers on wider viewports. */
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 100;
+}
+
+.sheet {
+  background: var(--bg);
+  color: var(--fg);
+  width: 100%;
+  max-width: 720px;
+  max-height: 85vh;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  padding: 16px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sheet__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.sheet__close {
+  min-width: var(--hit);
+  min-height: var(--hit);
+  padding: 0;
+  border: 1px solid var(--chart-grid);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sheet__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sheet__row {
+  width: 100%;
+  min-height: var(--hit);
+  padding: 0 16px;
+  border: 1px solid var(--chart-grid);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sheet__row-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sheet__row-distance {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet__empty {
+  color: var(--muted);
+  margin: 0;
+  padding: 8px 0;
 }
 
 .app__near-me {

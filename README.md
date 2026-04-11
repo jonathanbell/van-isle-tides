@@ -14,13 +14,21 @@ re-fetching.
 
 - **Works offline** after one online sync. The app layer owns the IWLS
   cache in IndexedDB; the service worker precaches only the app shell.
-- **48-hour tide chart** — tide curve, "now" line, high/low markers, and
-  sunrise/sunset shading computed locally via [SunCalc](https://github.com/mourner/suncalc).
+- **48-hour tide chart** — tide curve, "now" line, high/low markers,
+  sunrise/sunset shading computed locally via [SunCalc](https://github.com/mourner/suncalc),
+  and a hover tooltip that linearly interpolates the tide height at the
+  cursor.
 - **Sun mode** — a forced high-contrast theme for direct-sunlight
   readability: black-on-cream, thicker chart strokes, larger type, ≥44 px
   hit targets.
-- **Near me** — one-tap GPS → nearest pinned station, with graceful
-  fallback on denial or timeout.
+- **Near me** — one-tap GPS → nearest station in the bundled catalog.
+  Auto-pins the pick if it isn't already pinned, triggers a one-station
+  sync in the background, and shows the distance in the button label
+  (warning text when the match is >25 km away, so the user knows the
+  catalog didn't have anything closer).
+- **Pin / unpin any station** — the switcher lists pinned stations with
+  an × to unpin; a "+ Add station" sheet lists the full 51-station
+  Van-Isle catalog so the user can pin any of them on demand.
 - **Installable** — PWA manifest and icons for iOS/Android home screens.
 - **Stale cache warning** — amber banner at 14 days, chart still renders
   from cache.
@@ -45,9 +53,10 @@ npm run dev              # http://localhost:5173/van-isle-tides/
 ```
 
 The dev server uses the project base path `/van-isle-tides/` so URLs match
-production. On first load the app seeds the six pinned Vancouver Island
-stations from `src/data/stations.seed.json` into IndexedDB, then syncs
-30 days of predictions for each.
+production. On first load the app seeds the 51-station Vancouver Island
+catalog from `src/data/stations.seed.json` into IndexedDB (8 pinned by
+default, 43 additional stations discoverable via "+ Add station" or
+Near Me), then syncs 30 days of predictions for every pinned station.
 
 ### Useful scripts
 
