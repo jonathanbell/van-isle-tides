@@ -1,0 +1,80 @@
+import { useEffect, useState } from 'react';
+import type { HiLoEvent, TidePoint } from '../iwls/client';
+import {
+  getCacheStats,
+  getPointsInRange,
+  getSyncMeta,
+  type StationCacheStats,
+} from '../db/tides';
+import { getCachedHiLo } from '../sync/sync';
+
+export interface TideWindow {
+  points: TidePoint[];
+  hiLo: HiLoEvent[];
+  lastSyncedAt?: number;
+  fromMs: number;
+  toMs: number;
+  cacheStats: StationCacheStats;
+}
+
+interface UseTideDataArgs {
+  stationId: string | undefined;
+  /** Bumps when sync finishes so the hook re-reads IDB. */
+  refreshToken: number;
+  now?: number;
+}
+
+export function useTideData({ stationId, refreshToken, now }: UseTideDataArgs):
+  | { state: 'loading' }
+  | { state: 'ready'; data: TideWindow }
+  | { state: 'empty' } {
+  const [result, setResult] = useState<
+    { state: 'loading' } | { state: 'ready'; data: TideWindow } | { state: 'empty' }
+  >({ state: 'loading' });
+
+  useEffect(() => {
+    let cancelled = false;
+    if (!stationId) {
+      setResult({ state: 'empty' });
+      return;
+    }
+    setResult({ state: 'loading' });
+
+    const nowMs = now ?? Date.now();
+    const fromMs = nowMs - 2 * 60 * 60 * 1000;
+    const toMs = nowMs + 46 * 60 * 60 * 1000;
+
+    void (async () => {
+      const [points, meta, cacheStats] = await Promise.all([
+        getPointsInRange(stationId, fromMs, toMs),
+        getSyncMeta(stationId),
+        getCacheStats(stationId),
+      ]);
+      if (cancelled) return;
+      const hiLo = (getCachedHiLo(stationId) ?? []).filter(
+        (e) => e.t >= fromMs && e.t <= toMs,
+      );
+      if (!points.length) {
+        setResult({ state: 'empty' });
+        return;
+      }
+      setResult({
+        state: 'ready',
+        data: {
+          points,
+          hiLo,
+          lastSyncedAt: meta?.lastSyncedAt,
+          fromMs,
+          toMs,
+          cacheStats,
+        },
+      });
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [stationId, refreshToken, now]);
+
+  return result;
+}

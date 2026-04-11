@@ -1,0 +1,65 @@
+:root {
+  --bg: #ffffff;
+  --fg: #111418;
+  --muted: #5b6470;
+  --accent: #0a66c2;
+  --warning: #c77200;
+  --danger: #b42318;
+  --chart-line: #0a66c2;
+  --chart-stroke: 2px;
+  --chart-grid: #e3e6ea;
+  --chart-now: #b42318;
+  --chart-band: rgba(0, 0, 0, 0.06);
+  /* Subtle per-local-day accents. Shared between the tide chart (background
+     bands) and the hi/lo cards so the user can visually connect them.
+     --day-0 intentionally echoes --chart-line (the tide curve color). */
+  --day-0: rgba(10, 102, 194, 0.14);
+  --day-1: rgba(200, 130, 20, 0.16);
+  --day-2: rgba(30, 160, 130, 0.16);
+  --font-size-sm: 14px;
+  --font-size-base: 17px;
+  --font-size-lg: 22px;
+  --font-size-xl: 32px;
+  --radius: 10px;
+  --hit: 44px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0d10;
+    --fg: #f0f2f5;
+    --muted: #8a94a3;
+    --chart-line: #5eb0ff;
+    --chart-grid: #1e232a;
+    --chart-now: #ff6b60;
+    --chart-band: rgba(255, 255, 255, 0.06);
+    /* More saturated on dark backgrounds so the bands are clearly visible. */
+    --day-0: rgba(94, 176, 255, 0.18);
+    --day-1: rgba(255, 180, 90, 0.16);
+    --day-2: rgba(120, 220, 170, 0.15);
+  }
+}
+
+/* Sun mode: forced high-contrast regardless of system theme. */
+:root[data-theme='sun'] {
+  --bg: #fafaf5;
+  --fg: #000000;
+  --muted: #1a1a1a;
+  --accent: #000000;
+  --warning: #8a4a00;
+  --chart-line: #000000;
+  --chart-stroke: 4px;
+  --chart-grid: #bfbfbf;
+  --chart-now: #000000;
+  --chart-band: rgba(0, 0, 0, 0.08);
+  /* High-contrast mode: keep day tints as faint neutrals so the black
+     curve and hi/lo text stay legible in direct sunlight. */
+  --day-0: rgba(0, 0, 0, 0.04);
+  --day-1: rgba(0, 0, 0, 0.09);
+  --day-2: rgba(0, 0, 0, 0.06);
+  --font-size-sm: 16px;
+  --font-size-base: 20px;
+  --font-size-lg: 28px;
+  --font-size-xl: 40px;
+}

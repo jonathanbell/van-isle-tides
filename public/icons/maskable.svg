@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Full bleed background for maskable safe zone -->
+  <rect width="512" height="512" fill="#0b0d10"/>
+  <g transform="translate(64, 104)">
+    <path d="M-20 220 Q 48 160 116 220 T 252 220 T 388 220 T 420 220 L 420 360 L -20 360 Z" fill="#5eb0ff"/>
+    <path d="M-20 260 Q 48 200 116 260 T 252 260 T 388 260 T 420 260" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round"/>
+    <circle cx="320" cy="90" r="44" fill="#ffe29a"/>
+  </g>
+</svg>

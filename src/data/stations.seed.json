@@ -1,0 +1,211 @@
+[
+  {
+    "id": "5cebf1df3d0f4a073c4bbd1e",
+    "code": "07120",
+    "name": "Victoria Harbour",
+    "lat": 48.424363,
+    "lon": -123.370828,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": true,
+    "pinOrder": 0
+  },
+  {
+    "id": "5cebf1e13d0f4a073c4bbf81",
+    "code": "07109",
+    "name": "Esquimalt Harbour",
+    "lat": 48.440433,
+    "lon": -123.449833,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": true,
+    "pinOrder": 1
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc062",
+    "code": "08545",
+    "name": "Bamfield",
+    "lat": 48.836,
+    "lon": -125.136,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": true,
+    "pinOrder": 2
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc07c",
+    "code": "08615",
+    "name": "Tofino",
+    "lat": 49.154,
+    "lon": -125.913,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo",
+      "ap1"
+    ],
+    "pinned": true,
+    "pinOrder": 3
+  },
+  {
+    "id": "5cebf1de3d0f4a073c4bb9c7",
+    "code": "08408",
+    "name": "Port Hardy",
+    "lat": 50.722,
+    "lon": -127.489,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo",
+      "ap1"
+    ],
+    "pinned": true,
+    "pinOrder": 4
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc0a1",
+    "code": "08790",
+    "name": "Cape Scott",
+    "lat": 50.78,
+    "lon": -128.43,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": true,
+    "pinOrder": 5
+  },
+  {
+    "id": "5cebf1df3d0f4a073c4bbd2d",
+    "code": "07277",
+    "name": "Patricia Bay",
+    "lat": 48.6536,
+    "lon": -123.4515,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo",
+      "ap1"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1df3d0f4a073c4bbd35",
+    "code": "07330",
+    "name": "Fulford Harbour",
+    "lat": 48.769,
+    "lon": -123.451,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e03d0f4a073c4bbd47",
+    "code": "07460",
+    "name": "Ladysmith",
+    "lat": 48.99895,
+    "lon": -123.815316,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e03d0f4a073c4bbd51",
+    "code": "07535",
+    "name": "Dionisio Point",
+    "lat": 49.0139,
+    "lon": -123.5739,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1de3d0f4a073c4bb96d",
+    "code": "07917",
+    "name": "Nanaimo Harbour",
+    "lat": 49.1628,
+    "lon": -123.9235,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1de3d0f4a073c4bb996",
+    "code": "08074",
+    "name": "Campbell River",
+    "lat": 50.042,
+    "lon": -125.247,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc060",
+    "code": "08525",
+    "name": "Port Renfrew",
+    "lat": 48.555,
+    "lon": -124.421,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc097",
+    "code": "08735",
+    "name": "Winter Harbour",
+    "lat": 50.513,
+    "lon": -128.029,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo",
+      "ap1"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc0c2",
+    "code": "08976",
+    "name": "Bella Bella",
+    "lat": 52.163,
+    "lon": -128.143,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  }
+]
