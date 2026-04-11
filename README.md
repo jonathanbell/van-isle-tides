@@ -1,37 +1,36 @@
 # Van-Isle Tides
 
-An offline-first Progressive Web App for tidal heights at stations around
-Vancouver Island. Designed for fishing, boating, and beach trips to places
-that have no cell signal — the app caches a 30-day prediction window on
-first sync and runs fully offline from there.
+An offline-first PWA for tidal heights at stations around Vancouver Island.
+I built this for fishing and boating trips to places with no cell signal.
+On first sync it caches a 30-day prediction window and runs fully offline
+from there.
 
-Data comes from the Canadian Hydrographic Service
-[IWLS API](https://api-iwls.dfo-mpo.gc.ca/api/v1). Tide predictions are
-astronomical and stable, so once a future date is cached it doesn't need
-re-fetching.
+Data comes from the Canadian Hydrographic Service [IWLS
+API](https://api-iwls.dfo-mpo.gc.ca/api/v1). Tide predictions are astronomical
+and come from [stations around Vancouver
+Island](https://tides.gc.ca/en/stations), so once a future date is cached it
+never needs re-fetching.
 
 ## Features
 
-- **Works offline** after one online sync. The app layer owns the IWLS
-  cache in IndexedDB; the service worker precaches only the app shell.
-- **48-hour tide chart** — tide curve, "now" line, high/low markers,
-  sunrise/sunset shading computed locally via [SunCalc](https://github.com/mourner/suncalc),
-  and a hover tooltip that linearly interpolates the tide height at the
-  cursor.
-- **Sun mode** — a forced high-contrast theme for direct-sunlight
-  readability: black-on-cream, thicker chart strokes, larger type, ≥44 px
-  hit targets.
-- **Near me** — one-tap GPS → nearest station in the bundled catalog.
-  Auto-pins the pick if it isn't already pinned, triggers a one-station
-  sync in the background, and shows the distance in the button label
-  (warning text when the match is >25 km away, so the user knows the
-  catalog didn't have anything closer).
-- **Pin / unpin any station** — the switcher lists pinned stations with
-  an × to unpin; a "+ Add station" sheet lists the full 51-station
-  Van-Isle catalog so the user can pin any of them on demand.
-- **Installable** — PWA manifest and icons for iOS/Android home screens.
-- **Stale cache warning** — amber banner at 14 days, chart still renders
-  from cache.
+- Works offline after one online sync. The app layer owns the IWLS cache
+  in IndexedDB; the service worker only precaches the app shell.
+- 48-hour tide chart with a "now" line, high/low markers, sunrise/sunset
+  shading (computed locally via [SunCalc](https://github.com/mourner/suncalc)),
+  and a hover tooltip that linearly interpolates the height at the cursor.
+- Sun mode: a forced high-contrast theme for direct-sunlight readability.
+  Black on cream, thick chart strokes, big type, ≥44 px hit targets. No
+  hairline weights.
+- One-tap Near Me. GPS picks the nearest station in the catalog, auto-pins
+  it if it isn't already pinned, syncs it in the background, and labels
+  the button with the distance. If the nearest match is further than 25 km
+  away the label says so — the catalog is a hand-picked Van-Isle subset,
+  so a user well outside that area would otherwise get a misleading pick.
+- Pin or unpin any station from the full 51-station catalog. The switcher
+  shows an × on each pinned row; the "+ Add station" sheet lists everything
+  else.
+- Installable as a PWA on iOS and Android home screens.
+- Amber staleness banner at 14 days. The chart still renders from cache.
 
 ## Stack
 
@@ -39,7 +38,7 @@ Vite + React + TypeScript, [uPlot](https://github.com/leeoniya/uPlot) for
 the canvas chart, [idb](https://github.com/jakearchibald/idb) for typed
 IndexedDB access, [vite-plugin-pwa](https://vite-pwa-org.netlify.app/)
 (Workbox) for the service worker, and Vitest + fake-indexeddb for tests.
-The app is a pure static build deployed to GitHub Pages — no backend.
+It's a pure static build deployed to GitHub Pages. No backend.
 
 ## Getting started
 
@@ -89,15 +88,16 @@ scripts/           # Manual seed generator
 test/              # Vitest setup: fake-indexeddb + jest-dom
 ```
 
-See `CLAUDE.md` for the architectural conventions — in particular the two
-distinct "day" concepts (UTC day buckets for storage vs. America/Vancouver
-local days for rendering), the sync invariants, and the sun-mode rules.
+See `CLAUDE.md` for the architectural conventions. The two most important
+things to know before editing: there are two distinct "day" concepts (UTC
+day buckets for IDB storage vs. America/Vancouver local days for the UI),
+and the sync layer has three invariants that must be preserved.
 
 ## Deployment
 
-Push to `main` → GitHub Actions runs typecheck and tests, then builds and
-publishes to GitHub Pages. Deploy is gated on `needs: verify`, so a failing
-test leaves the previously deployed site untouched.
+Push to `main` and GitHub Actions runs typecheck and tests, then builds
+and publishes to GitHub Pages. The deploy job has `needs: verify`, so a
+failing test leaves the previously deployed site untouched.
 
 To host it yourself:
 
@@ -130,4 +130,4 @@ The API is open and unauthenticated; please respect the rate limits
 
 ## License
 
-Personal project — no license specified.
+Personal project. No license specified.
