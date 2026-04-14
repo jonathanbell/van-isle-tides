@@ -144,6 +144,18 @@ button:active {
   transform: translate(-50%, 4px);
 }
 
+/* Horizontal guide bound to the tide curve height at the cursor x.
+   Mirrors uPlot's built-in dashed x-crosshair styling. */
+.tide-chart__y-guide {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  pointer-events: none;
+  border-bottom: 1px dashed #607D8B;
+  transform: translateY(-0.5px);
+}
+
 .hilo-strip {
   list-style: none;
   margin: 0;

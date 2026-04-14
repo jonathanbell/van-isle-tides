@@ -78,6 +78,10 @@ export function TideChart(props: TideChartProps) {
       const timeTip = document.createElement('div');
       timeTip.className = 'tide-chart__time-tip';
       timeTip.style.display = 'none';
+      // Horizontal guide bound to the tide curve at the cursor x (not mouse y).
+      const yGuide = document.createElement('div');
+      yGuide.className = 'tide-chart__y-guide';
+      yGuide.style.display = 'none';
 
       const opts: uPlot.Options = {
         width,
@@ -122,7 +126,9 @@ export function TideChart(props: TideChartProps) {
         // Keep uPlot's built-in cursor (x-line + idx tracking) for hover;
         // disable drag-to-zoom and the default point marker since we draw
         // our own tooltip overlay below.
-        cursor: { drag: { x: false, y: false }, points: { show: false } },
+        // y: false disables the built-in horizontal crosshair — we draw our
+        // own guide bound to the tide curve height in setCursor below.
+        cursor: { drag: { x: false, y: false }, points: { show: false }, y: false },
         hooks: {
           drawClear: [
             (u) => {
@@ -185,6 +191,7 @@ export function TideChart(props: TideChartProps) {
               if (left == null || left < 0 || idx == null) {
                 valueTip.style.display = 'none';
                 timeTip.style.display = 'none';
+                yGuide.style.display = 'none';
                 return;
               }
               const xs = u.data[0] as number[];
@@ -218,6 +225,9 @@ export function TideChart(props: TideChartProps) {
               timeTip.style.display = 'block';
               timeTip.style.left = `${left}px`;
               timeTip.textContent = formatLocalDateTime(tSec * 1000);
+
+              yGuide.style.display = 'block';
+              yGuide.style.top = `${yPx}px`;
             },
           ],
         },
@@ -228,6 +238,7 @@ export function TideChart(props: TideChartProps) {
       // Append to `u.over` (the plot-area div uPlot already manages) so
       // cursor coordinates map straight to their `left`/`top` without any
       // bounding-box math. Destroyed automatically with the plot.
+      plotRef.current.over.appendChild(yGuide);
       plotRef.current.over.appendChild(valueTip);
       plotRef.current.over.appendChild(timeTip);
     };
