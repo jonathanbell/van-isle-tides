@@ -53,11 +53,13 @@
   --chart-grid: #bfbfbf;
   --chart-now: #000000;
   --chart-band: rgba(0, 0, 0, 0.08);
-  /* High-contrast mode: keep day tints as faint neutrals so the black
-     curve and hi/lo text stay legible in direct sunlight. */
-  --day-0: rgba(0, 0, 0, 0.04);
-  --day-1: rgba(0, 0, 0, 0.09);
-  --day-2: rgba(0, 0, 0, 0.06);
+  /* High-contrast mode: day tints need to be distinguishable in direct
+     sunlight — keep them neutral (so the black curve and hi/lo text stay
+     legible), but spread the steps far enough apart that adjacent days
+     read as clearly different. */
+  --day-0: rgba(0, 0, 0, 0.06);
+  --day-1: rgba(0, 0, 0, 0.22);
+  --day-2: rgba(0, 0, 0, 0.14);
   --font-size-sm: 16px;
   --font-size-base: 20px;
   --font-size-lg: 28px;

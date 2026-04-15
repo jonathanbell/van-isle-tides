@@ -161,7 +161,8 @@ button:active {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-auto-rows: 1fr;
   gap: 8px;
 }
 
@@ -194,17 +195,20 @@ button:active {
   justify-self: end;
   font-weight: 700;
   font-size: var(--font-size-lg);
+  white-space: nowrap;
 }
 
 .hilo-strip__time {
   font-variant-numeric: tabular-nums;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .hilo-strip__date {
   justify-self: end;
   color: var(--muted);
   font-size: var(--font-size-sm);
+  white-space: nowrap;
 }
 
 .station-switcher__list {
@@ -310,15 +314,15 @@ button:active {
   color: var(--fg);
   width: 100%;
   max-width: 720px;
-  max-height: 85vh;
+  height: 85vh;
   border-top-left-radius: var(--radius);
   border-top-right-radius: var(--radius);
   padding: 16px;
   padding-bottom: max(16px, env(safe-area-inset-bottom));
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-height: 0;
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -355,6 +359,11 @@ button:active {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .sheet__row {
@@ -407,4 +416,17 @@ button:active {
   padding: 0 20px;
   border-radius: var(--radius);
   font-weight: 700;
+}
+
+.app__footer {
+  margin-top: 16px;
+  padding: 12px 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.app__footer a {
+  color: inherit;
+  text-decoration: underline;
 }

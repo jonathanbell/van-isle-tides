@@ -113,12 +113,12 @@ export function isStale(lastSyncedAt: number | undefined, now: number = Date.now
   return now - lastSyncedAt > STALE_AFTER_MS;
 }
 
-/** Extract a 48h window (now-2h .. now+46h) from a set of points. */
+/** Extract a 48h window (now-6h .. now+42h) from a set of points. */
 export function windowAroundNow(
   points: TidePoint[],
   now: number = Date.now(),
 ): TidePoint[] {
-  const from = now - 2 * 60 * 60 * 1000;
-  const to = now + 46 * 60 * 60 * 1000;
+  const from = now - 6 * 60 * 60 * 1000;
+  const to = now + 42 * 60 * 60 * 1000;
   return points.filter((p) => p.t >= from && p.t <= to);
 }

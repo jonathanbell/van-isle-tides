@@ -106,11 +106,11 @@
     "pinOrder": 7
   },
   {
-    "id": "5dd30650e0fdc4b9b4be6c25",
-    "code": "07010",
-    "name": "Point No Point",
-    "lat": 48.3951,
-    "lon": -123.9709,
+    "id": "5cebf1df3d0f4a073c4bbd24",
+    "code": "07140",
+    "name": "Finnerty Cove",
+    "lat": 48.473583,
+    "lon": -123.296083,
     "timeSeries": [
       "wlp",
       "wlp-hilo"
@@ -119,52 +119,12 @@
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1df3d0f4a073c4bbd0f",
-    "code": "07020",
-    "name": "Sooke",
-    "lat": 48.3695,
-    "lon": -123.726,
+    "id": "5dd3064de0fdc4b9b4be66e4",
+    "code": "07255",
+    "name": "Saanichton Bay",
+    "lat": 48.5989,
+    "lon": -123.3885,
     "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
-    "id": "5cebf1df3d0f4a073c4bbd15",
-    "code": "07080",
-    "name": "Pedder Bay",
-    "lat": 48.3317,
-    "lon": -123.5501,
-    "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
-    "id": "5cebf1e13d0f4a073c4bbf81",
-    "code": "07109",
-    "name": "Esquimalt Harbour",
-    "lat": 48.440433,
-    "lon": -123.449833,
-    "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
-    "id": "5cebf1df3d0f4a073c4bbd1e",
-    "code": "07120",
-    "name": "Victoria Harbour",
-    "lat": 48.424363,
-    "lon": -123.370828,
-    "timeSeries": [
-      "wlo",
       "wlp",
       "wlp-hilo"
     ],
@@ -179,6 +139,19 @@
     "lon": -123.3929,
     "timeSeries": [
       "wlo",
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5dd3064ee0fdc4b9b4be6872",
+    "code": "07270",
+    "name": "Swartz Bay",
+    "lat": 48.6892,
+    "lon": -123.4108,
+    "timeSeries": [
       "wlp",
       "wlp-hilo"
     ],
@@ -214,19 +187,6 @@
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1df3d0f4a073c4bbd31",
-    "code": "07310",
-    "name": "Cowichan Bay",
-    "lat": 48.7404,
-    "lon": -123.6184,
-    "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
     "id": "5cebf1df3d0f4a073c4bbd35",
     "code": "07330",
     "name": "Fulford Harbour",
@@ -253,6 +213,19 @@
     "pinOrder": 9007199254740991
   },
   {
+    "id": "5cebf1e03d0f4a073c4bbd3b",
+    "code": "07360",
+    "name": "Hope Bay",
+    "lat": 48.8034,
+    "lon": -123.2759,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
     "id": "5cebf1e03d0f4a073c4bbd3d",
     "code": "07407",
     "name": "Ganges",
@@ -271,6 +244,97 @@
     "name": "Montague Harbour",
     "lat": 48.8927,
     "lon": -123.3922,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5dd3064fe0fdc4b9b4be6af4",
+    "code": "07437",
+    "name": "Porlier Pass",
+    "lat": 49.0113,
+    "lon": -123.5859,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e03d0f4a073c4bbd51",
+    "code": "07535",
+    "name": "Dionisio Point",
+    "lat": 49.0139,
+    "lon": -123.5739,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5dd3064fe0fdc4b9b4be6964",
+    "code": "07445",
+    "name": "Degnen Bay",
+    "lat": 49.133333,
+    "lon": -123.716667,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1de3d0f4a073c4bb9d3",
+    "code": "07550",
+    "name": "Silva Bay",
+    "lat": 49.15,
+    "lon": -123.7,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1df3d0f4a073c4bbd31",
+    "code": "07310",
+    "name": "Cowichan Bay",
+    "lat": 48.7404,
+    "lon": -123.6184,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1df3d0f4a073c4bbd33",
+    "code": "07315",
+    "name": "Maple Bay",
+    "lat": 48.8157,
+    "lon": -123.60961,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e03d0f4a073c4bbd43",
+    "code": "07450",
+    "name": "Crofton",
+    "lat": 48.874583,
+    "lon": -123.643516,
     "timeSeries": [
       "wlp",
       "wlp-hilo"
@@ -318,11 +382,11 @@
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1e03d0f4a073c4bbd51",
-    "code": "07535",
-    "name": "Dionisio Point",
-    "lat": 49.0139,
-    "lon": -123.5739,
+    "id": "5cebf1e13d0f4a073c4bbf83",
+    "code": "07480",
+    "name": "Boat Harbour",
+    "lat": 49.09,
+    "lon": -123.7982,
     "timeSeries": [
       "wlp",
       "wlp-hilo"
@@ -358,11 +422,37 @@
     "pinOrder": 9007199254740991
   },
   {
+    "id": "5cebf1de3d0f4a073c4bb971",
+    "code": "07935",
+    "name": "Winchelsea Island",
+    "lat": 49.3,
+    "lon": -124.086,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
     "id": "5dd30650e0fdc4b9b4be6e1a",
     "code": "07940",
     "name": "French Creek",
     "lat": 49.349604,
     "lon": -124.358817,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1de3d0f4a073c4bb97b",
+    "code": "07982",
+    "name": "False Bay",
+    "lat": 49.483,
+    "lon": -124.35,
     "timeSeries": [
       "wlp",
       "wlp-hilo"
@@ -410,19 +500,6 @@
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1e23d0f4a073c4bc023",
-    "code": "08035",
-    "name": "Heriot Bay",
-    "lat": 50.1,
-    "lon": -125.2,
-    "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
     "id": "5cebf1de3d0f4a073c4bb996",
     "code": "08074",
     "name": "Campbell River",
@@ -450,11 +527,63 @@
     "pinOrder": 9007199254740991
   },
   {
+    "id": "5cebf1e23d0f4a073c4bc023",
+    "code": "08035",
+    "name": "Heriot Bay",
+    "lat": 50.1,
+    "lon": -125.2,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1de3d0f4a073c4bb989",
+    "code": "08045",
+    "name": "Surge Narrows",
+    "lat": 50.22719,
+    "lon": -125.112,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1de3d0f4a073c4bb9a0",
+    "code": "08180",
+    "name": "Chatham Pt.",
+    "lat": 50.331,
+    "lon": -125.442,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
     "id": "5cebf1de3d0f4a073c4bb9a4",
     "code": "08215",
     "name": "Kelsey Bay",
     "lat": 50.398,
     "lon": -125.961,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1de3d0f4a073c4bb9a6",
+    "code": "08245",
+    "name": "Port Neville",
+    "lat": 50.496,
+    "lon": -126.087,
     "timeSeries": [
       "wlp",
       "wlp-hilo"
@@ -517,11 +646,117 @@
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1e23d0f4a073c4bc060",
-    "code": "08525",
-    "name": "Port Renfrew",
-    "lat": 48.555,
-    "lon": -124.421,
+    "id": "5cebf1e23d0f4a073c4bc097",
+    "code": "08735",
+    "name": "Winter Harbour",
+    "lat": 50.513,
+    "lon": -128.029,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo",
+      "ap1"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc09f",
+    "code": "08765",
+    "name": "Coal Harbour",
+    "lat": 50.599,
+    "lon": -127.581,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc09b",
+    "code": "08750",
+    "name": "Port Alice",
+    "lat": 50.384,
+    "lon": -127.455,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5dd30650e0fdc4b9b4be6d50",
+    "code": "08715",
+    "name": "Fair Harbour",
+    "lat": 50.068867,
+    "lon": -127.138867,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc090",
+    "code": "08710",
+    "name": "Kyuquot",
+    "lat": 50.026,
+    "lon": -127.376,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc08e",
+    "code": "08670",
+    "name": "Zeballos",
+    "lat": 49.979,
+    "lon": -126.846,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5dd3064ee0fdc4b9b4be6906",
+    "code": "08664",
+    "name": "Ceepeecee",
+    "lat": 49.874,
+    "lon": -126.716,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc08c",
+    "code": "08650",
+    "name": "Gold River",
+    "lat": 49.679,
+    "lon": -126.126,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e23d0f4a073c4bc075",
+    "code": "08595",
+    "name": "Ucluelet",
+    "lat": 48.947,
+    "lon": -125.552,
     "timeSeries": [
       "wlo",
       "wlp",
@@ -531,13 +766,12 @@
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1e23d0f4a073c4bc062",
-    "code": "08545",
-    "name": "Bamfield",
-    "lat": 48.836,
-    "lon": -125.136,
+    "id": "5cebf1e23d0f4a073c4bc071",
+    "code": "08585",
+    "name": "Effingham Bay",
+    "lat": 48.878,
+    "lon": -125.313,
     "timeSeries": [
-      "wlo",
       "wlp",
       "wlp-hilo"
     ],
@@ -560,11 +794,11 @@
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1e23d0f4a073c4bc075",
-    "code": "08595",
-    "name": "Ucluelet",
-    "lat": 48.947,
-    "lon": -125.552,
+    "id": "5cebf1e23d0f4a073c4bc062",
+    "code": "08545",
+    "name": "Bamfield",
+    "lat": 48.836,
+    "lon": -125.136,
     "timeSeries": [
       "wlo",
       "wlp",
@@ -574,91 +808,25 @@
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1e23d0f4a073c4bc08c",
-    "code": "08650",
-    "name": "Gold River",
-    "lat": 49.679,
-    "lon": -126.126,
-    "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
-    "id": "5dd3064ee0fdc4b9b4be6906",
-    "code": "08664",
-    "name": "Ceepeecee",
-    "lat": 49.874,
-    "lon": -126.716,
-    "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
-    "id": "5cebf1e23d0f4a073c4bc08e",
-    "code": "08670",
-    "name": "Zeballos",
-    "lat": 49.979,
-    "lon": -126.846,
-    "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
-    "id": "5cebf1e23d0f4a073c4bc090",
-    "code": "08710",
-    "name": "Kyuquot",
-    "lat": 50.026,
-    "lon": -127.376,
-    "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
-    "id": "5dd30650e0fdc4b9b4be6d50",
-    "code": "08715",
-    "name": "Fair Harbour",
-    "lat": 50.068867,
-    "lon": -127.138867,
-    "timeSeries": [
-      "wlp",
-      "wlp-hilo"
-    ],
-    "pinned": false,
-    "pinOrder": 9007199254740991
-  },
-  {
-    "id": "5cebf1e23d0f4a073c4bc097",
-    "code": "08735",
-    "name": "Winter Harbour",
-    "lat": 50.513,
-    "lon": -128.029,
+    "id": "5cebf1e23d0f4a073c4bc060",
+    "code": "08525",
+    "name": "Port Renfrew",
+    "lat": 48.555,
+    "lon": -124.421,
     "timeSeries": [
       "wlo",
       "wlp",
-      "wlp-hilo",
-      "ap1"
+      "wlp-hilo"
     ],
     "pinned": false,
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1e23d0f4a073c4bc09b",
-    "code": "08750",
-    "name": "Port Alice",
-    "lat": 50.384,
-    "lon": -127.455,
+    "id": "5dd30650e0fdc4b9b4be6c25",
+    "code": "07010",
+    "name": "Point No Point",
+    "lat": 48.3951,
+    "lon": -123.9709,
     "timeSeries": [
       "wlp",
       "wlp-hilo"
@@ -667,11 +835,90 @@
     "pinOrder": 9007199254740991
   },
   {
-    "id": "5cebf1e23d0f4a073c4bc09f",
-    "code": "08765",
-    "name": "Coal Harbour",
-    "lat": 50.599,
-    "lon": -127.581,
+    "id": "5cebf1df3d0f4a073c4bbd0d",
+    "code": "07013",
+    "name": "Sheringham Point",
+    "lat": 48.377066,
+    "lon": -123.921166,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1df3d0f4a073c4bbd0f",
+    "code": "07020",
+    "name": "Sooke",
+    "lat": 48.3695,
+    "lon": -123.726,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1df3d0f4a073c4bbd13",
+    "code": "07030",
+    "name": "Becher Bay",
+    "lat": 48.3349,
+    "lon": -123.6038,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1df3d0f4a073c4bbd15",
+    "code": "07080",
+    "name": "Pedder Bay",
+    "lat": 48.3317,
+    "lon": -123.5501,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1e13d0f4a073c4bbf81",
+    "code": "07109",
+    "name": "Esquimalt Harbour",
+    "lat": 48.440433,
+    "lon": -123.449833,
+    "timeSeries": [
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5cebf1df3d0f4a073c4bbd1e",
+    "code": "07120",
+    "name": "Victoria Harbour",
+    "lat": 48.424363,
+    "lon": -123.370828,
+    "timeSeries": [
+      "wlo",
+      "wlp",
+      "wlp-hilo"
+    ],
+    "pinned": false,
+    "pinOrder": 9007199254740991
+  },
+  {
+    "id": "5dd3064fe0fdc4b9b4be691e",
+    "code": "07115",
+    "name": "Clover Point",
+    "lat": 48.403816,
+    "lon": -123.3486,
     "timeSeries": [
       "wlp",
       "wlp-hilo"

@@ -86,7 +86,7 @@ reload the cache is empty, so `useTideData` falls back to `deriveHiLo(points)`
 
 ### Render window
 
-The chart always shows `[now - 2 h, now + 46 h]` (48 h visible). `useTideData` reads
+The chart always shows `[now - 6 h, now + 42 h]` (48 h visible). `useTideData` reads
 that window from IDB keyed on `{stationId, refreshToken, now}`; the sync orchestrator
 bumps `refreshToken` on completion so the hook re-reads. The `now` value ticks every
 60 s from `App.tsx` so the now-line and "synced Xm ago" label stay fresh without

@@ -26,7 +26,7 @@ never needs re-fetching.
   the button with the distance. If the nearest match is further than 25 km
   away the label says so — the catalog is a hand-picked Van-Isle subset,
   so a user well outside that area would otherwise get a misleading pick.
-- Pin or unpin any station from the full 51-station catalog. The switcher
+- Pin or unpin any station from the full 70-station catalog. The switcher
   shows an × on each pinned row; the "+ Add station" sheet lists everything
   else.
 - Installable as a PWA on iOS and Android home screens.
@@ -52,9 +52,9 @@ npm run dev              # http://localhost:5173/van-isle-tides/
 ```
 
 The dev server uses the project base path `/van-isle-tides/` so URLs match
-production. On first load the app seeds the 51-station Vancouver Island
+production. On first load the app seeds the 70-station Vancouver Island
 catalog from `src/data/stations.seed.json` into IndexedDB (8 pinned by
-default, 43 additional stations discoverable via "+ Add station" or
+default, 62 additional stations discoverable via "+ Add station" or
 Near Me), then syncs 30 days of predictions for every pinned station.
 
 ### Useful scripts
@@ -127,6 +127,16 @@ Tidal predictions and station metadata come from the
 [DFO/CHS Integrated Water Level System (IWLS) API](https://api-iwls.dfo-mpo.gc.ca/swagger-ui.html).
 The API is open and unauthenticated; please respect the rate limits
 (30 req/min, 3 req/s) enforced client-side by `src/iwls/queue.ts`.
+
+## Ideas / TODO
+
+- **Seed auto-refresh via `seedVersion`.** `bootstrapStationsIfEmpty()` only
+  runs on first install, so when `stations.seed.json` changes (new stations
+  added, names corrected, CCW reorder), existing installs have to manually
+  clear the `vit` IndexedDB to pick up the update. Add a `seedVersion`
+  value to the `settings` store, bump it whenever the seed changes, and
+  on boot diff it against the bundled version to upsert new/updated
+  station rows without wiping user pins or cached predictions.
 
 ## License
 

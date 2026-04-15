@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import uPlot, { type AlignedData } from 'uplot';
 import 'uplot/dist/uPlot.min.css';
 import type { HiLoEvent, TidePoint } from '../iwls/client';
@@ -45,6 +45,7 @@ function readThemeTokens(): ThemeTokens {
 export function TideChart(props: TideChartProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const plotRef = useRef<uPlot | null>(null);
+  const [themeVersion, setThemeVersion] = useState(0);
 
   // Recreate the plot whenever dimensions change. uPlot is DOM-imperative so
   // we tear down and rebuild rather than mutate options in place.
@@ -253,15 +254,13 @@ export function TideChart(props: TideChartProps) {
         plotRef.current = null;
       }
     };
-  }, [props.points, props.hiLo, props.nowMs, props.nightBands, props.fromMs, props.toMs]);
+  }, [props.points, props.hiLo, props.nowMs, props.nightBands, props.fromMs, props.toMs, themeVersion]);
 
-  // Re-draw on theme change (no data change).
+  // Theme change triggers a full rebuild — uPlot series/axes options and the
+  // draw-hook closures all capture tokens at build time, so redraw alone
+  // would paint with stale colors/fonts/stroke width.
   useEffect(() => {
-    const mo = new MutationObserver(() => {
-      if (!plotRef.current || !hostRef.current) return;
-      // Trigger a rebuild via ResizeObserver path by setting width.
-      plotRef.current.redraw(false, true);
-    });
+    const mo = new MutationObserver(() => setThemeVersion((v) => v + 1));
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     return () => mo.disconnect();
   }, []);

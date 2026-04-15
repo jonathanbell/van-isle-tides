@@ -42,8 +42,8 @@ export function useTideData({ stationId, refreshToken, now }: UseTideDataArgs):
     setResult({ state: 'loading' });
 
     const nowMs = now ?? Date.now();
-    const fromMs = nowMs - 2 * 60 * 60 * 1000;
-    const toMs = nowMs + 46 * 60 * 60 * 1000;
+    const fromMs = nowMs - 6 * 60 * 60 * 1000;
+    const toMs = nowMs + 42 * 60 * 60 * 1000;
 
     void (async () => {
       const [points, meta, cacheStats] = await Promise.all([

@@ -132,13 +132,13 @@ describe('isStale and windowAroundNow', () => {
     expect(isStale(now - STALE_AFTER_MS + 1000, now)).toBe(false);
   });
 
-  it('windowAroundNow keeps [-2h, +46h]', () => {
+  it('windowAroundNow keeps [-6h, +42h]', () => {
     const now = Date.parse('2026-04-05T12:00:00Z');
     const pts = [
-      { t: now - 3 * 3600_000, v: 1 }, // out
+      { t: now - 7 * 3600_000, v: 1 }, // out
       { t: now - 1 * 3600_000, v: 2 }, // in
       { t: now + 20 * 3600_000, v: 3 }, // in
-      { t: now + 48 * 3600_000, v: 4 }, // out
+      { t: now + 43 * 3600_000, v: 4 }, // out
     ];
     expect(windowAroundNow(pts, now).map((p) => p.v)).toEqual([2, 3]);
   });

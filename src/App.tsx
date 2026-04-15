@@ -254,6 +254,16 @@ export default function App() {
           userPoint={userPoint}
         />
       )}
+
+      <footer className="app__footer">
+        <a
+          href="https://github.com/jonathanbell/van-isle-tides"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Fork me on GitHub
+        </a>
+      </footer>
     </div>
   );
 }
